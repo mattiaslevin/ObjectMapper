@@ -40,10 +40,22 @@ The process steps described above will continue recursevly until the complete ob
 ###Annotations
  
 The framework use macros to help the mapper when the normal conversions are not enough.
-  
-- `ANNOTATE_PROPERTY_FOR_KEY(property, key)` - Use this annotation to map a key/value to an arbitrary property name
-- `ANNOTATE_CLASS_FOR_ARRAY(clazz, property)`- Tell the mapper what class to put in a NSArray property
- 
+
+<table border="1">
+<tr>
+<th>Macro</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>ANNOTATE_PROPERTY_FOR_KEY(property, key)</td>
+<td>Use this annotation to map a key/value to an arbitrary property name</td>
+</tr>
+<tr>
+<td>ANNOTATE_CLASS_FOR_ARRAY(clazz, property)</td>
+<td>Tell the mapper what class to put in a NSArray property</td>
+</tr>
+</table>
+
 Use these macros in the @implementation section of your domain objects just above the properties @synthesize statement.
  
     @implementation Person
