@@ -1,0 +1,10 @@
+{
+    "string":"stringValue",
+    "stringMissing":"missing",
+    "integer":12345,
+    "integerMissing":99999,
+    "decimal":12.345,
+    "decimalMissing":99.99,
+    "boolean":true,
+    "booleanMissing":false
+}

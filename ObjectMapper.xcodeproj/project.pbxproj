@@ -1,0 +1,536 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		CDB49722158426DE00C2157F /* Documentation */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = CDB49723158426DF00C2157F /* Build configuration list for PBXAggregateTarget "Documentation" */;
+			buildPhases = (
+				CDB49726158426E400C2157F /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = Documentation;
+			productName = Documentation;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		CDB496A4157E572E00C2157F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496A3157E572E00C2157F /* Foundation.framework */; };
+		CDB496B2157E572F00C2157F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496B1157E572F00C2157F /* SenTestingKit.framework */; };
+		CDB496B4157E572F00C2157F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496B3157E572F00C2157F /* UIKit.framework */; };
+		CDB496B5157E572F00C2157F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496A3157E572E00C2157F /* Foundation.framework */; };
+		CDB496B8157E572F00C2157F /* libObjectMapper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496A0157E572E00C2157F /* libObjectMapper.a */; };
+		CDB496BE157E572F00C2157F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDB496BC157E572F00C2157F /* InfoPlist.strings */; };
+		CDB496D2157E57C400C2157F /* ObjectMapper.h in Headers */ = {isa = PBXBuildFile; fileRef = CDB496D0157E57C400C2157F /* ObjectMapper.h */; };
+		CDB496D3157E57C400C2157F /* ObjectMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496D1157E57C400C2157F /* ObjectMapper.m */; };
+		CDB496F2157E581200C2157F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496D7157E581200C2157F /* JSONKit.m */; };
+		CDB496F6157E581200C2157F /* ObjectMapperTest.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496DA157E581200C2157F /* ObjectMapperTest.m */; };
+		CDB496F9157E581200C2157F /* ObjectWithArrayTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496DC157E581200C2157F /* ObjectWithArrayTypes.m */; };
+		CDB496FC157E581200C2157F /* ObjectWithBasicTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496DE157E581200C2157F /* ObjectWithBasicTypes.m */; };
+		CDB496FF157E581200C2157F /* ObjectWithBuiltInTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496E0157E581200C2157F /* ObjectWithBuiltInTypes.m */; };
+		CDB49702157E581200C2157F /* ObjectWithMissingObject.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496E2157E581200C2157F /* ObjectWithMissingObject.m */; };
+		CDB49705157E581200C2157F /* ObjectWithObjectTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496E4157E581200C2157F /* ObjectWithObjectTypes.m */; };
+		CDB49708157E581200C2157F /* ObjectWithSomeNullValues.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496E6157E581200C2157F /* ObjectWithSomeNullValues.m */; };
+		CDB4970B157E581200C2157F /* RuntimeReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB496E8157E581200C2157F /* RuntimeReporter.m */; };
+		CDB4970C157E581200C2157F /* ArrayWithObjectTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496E9157E581200C2157F /* ArrayWithObjectTypes.json */; };
+		CDB4970D157E581200C2157F /* ObjectWithArrayTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496EA157E581200C2157F /* ObjectWithArrayTypes.json */; };
+		CDB4970E157E581200C2157F /* ObjectWithBasicTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496EB157E581200C2157F /* ObjectWithBasicTypes.json */; };
+		CDB4970F157E581200C2157F /* ObjectWithBasicTypesMissingProperties.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496EC157E581200C2157F /* ObjectWithBasicTypesMissingProperties.json */; };
+		CDB49710157E581200C2157F /* ObjectWithMissingObject.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496ED157E581200C2157F /* ObjectWithMissingObject.json */; };
+		CDB49711157E581200C2157F /* ObjectWithObjectTypes.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496EE157E581200C2157F /* ObjectWithObjectTypes.json */; };
+		CDB49712157E581200C2157F /* ObjectWithSomeNullValues.json in Resources */ = {isa = PBXBuildFile; fileRef = CDB496EF157E581200C2157F /* ObjectWithSomeNullValues.json */; };
+		CDB49720158390F200C2157F /* AnnotatedObjectWithBasicTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = CDB4971F158390F100C2157F /* AnnotatedObjectWithBasicTypes.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CDB496B6157E572F00C2157F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CDB49697157E572E00C2157F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CDB4969F157E572E00C2157F;
+			remoteInfo = ObjectMapper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CDB496A0157E572E00C2157F /* libObjectMapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectMapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDB496A3157E572E00C2157F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CDB496A7157E572E00C2157F /* ObjectMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectMapper-Prefix.pch"; sourceTree = "<group>"; };
+		CDB496B0157E572F00C2157F /* ObjectMapperTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectMapperTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CDB496B1157E572F00C2157F /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		CDB496B3157E572F00C2157F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		CDB496BB157E572F00C2157F /* ObjectMapperTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ObjectMapperTests-Info.plist"; sourceTree = "<group>"; };
+		CDB496BD157E572F00C2157F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CDB496D0157E57C400C2157F /* ObjectMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectMapper.h; sourceTree = "<group>"; };
+		CDB496D1157E57C400C2157F /* ObjectMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectMapper.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		CDB496D6157E581200C2157F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		CDB496D7157E581200C2157F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		CDB496D9157E581200C2157F /* ObjectMapperTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectMapperTest.h; sourceTree = "<group>"; };
+		CDB496DA157E581200C2157F /* ObjectMapperTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ObjectMapperTest.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		CDB496DB157E581200C2157F /* ObjectWithArrayTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithArrayTypes.h; sourceTree = "<group>"; };
+		CDB496DC157E581200C2157F /* ObjectWithArrayTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithArrayTypes.m; sourceTree = "<group>"; };
+		CDB496DD157E581200C2157F /* ObjectWithBasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithBasicTypes.h; sourceTree = "<group>"; };
+		CDB496DE157E581200C2157F /* ObjectWithBasicTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithBasicTypes.m; sourceTree = "<group>"; };
+		CDB496DF157E581200C2157F /* ObjectWithBuiltInTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithBuiltInTypes.h; sourceTree = "<group>"; };
+		CDB496E0157E581200C2157F /* ObjectWithBuiltInTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithBuiltInTypes.m; sourceTree = "<group>"; };
+		CDB496E1157E581200C2157F /* ObjectWithMissingObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithMissingObject.h; sourceTree = "<group>"; };
+		CDB496E2157E581200C2157F /* ObjectWithMissingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithMissingObject.m; sourceTree = "<group>"; };
+		CDB496E3157E581200C2157F /* ObjectWithObjectTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithObjectTypes.h; sourceTree = "<group>"; };
+		CDB496E4157E581200C2157F /* ObjectWithObjectTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithObjectTypes.m; sourceTree = "<group>"; };
+		CDB496E5157E581200C2157F /* ObjectWithSomeNullValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithSomeNullValues.h; sourceTree = "<group>"; };
+		CDB496E6157E581200C2157F /* ObjectWithSomeNullValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithSomeNullValues.m; sourceTree = "<group>"; };
+		CDB496E7157E581200C2157F /* RuntimeReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeReporter.h; sourceTree = "<group>"; };
+		CDB496E8157E581200C2157F /* RuntimeReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuntimeReporter.m; sourceTree = "<group>"; };
+		CDB496E9157E581200C2157F /* ArrayWithObjectTypes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ArrayWithObjectTypes.json; sourceTree = "<group>"; };
+		CDB496EA157E581200C2157F /* ObjectWithArrayTypes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithArrayTypes.json; sourceTree = "<group>"; };
+		CDB496EB157E581200C2157F /* ObjectWithBasicTypes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithBasicTypes.json; sourceTree = "<group>"; };
+		CDB496EC157E581200C2157F /* ObjectWithBasicTypesMissingProperties.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithBasicTypesMissingProperties.json; sourceTree = "<group>"; };
+		CDB496ED157E581200C2157F /* ObjectWithMissingObject.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithMissingObject.json; sourceTree = "<group>"; };
+		CDB496EE157E581200C2157F /* ObjectWithObjectTypes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithObjectTypes.json; sourceTree = "<group>"; };
+		CDB496EF157E581200C2157F /* ObjectWithSomeNullValues.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithSomeNullValues.json; sourceTree = "<group>"; };
+		CDB4971E158390F100C2157F /* AnnotatedObjectWithBasicTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnotatedObjectWithBasicTypes.h; sourceTree = "<group>"; };
+		CDB4971F158390F100C2157F /* AnnotatedObjectWithBasicTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnotatedObjectWithBasicTypes.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CDB4969D157E572E00C2157F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB496A4157E572E00C2157F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDB496AC157E572F00C2157F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB496B2157E572F00C2157F /* SenTestingKit.framework in Frameworks */,
+				CDB496B4157E572F00C2157F /* UIKit.framework in Frameworks */,
+				CDB496B5157E572F00C2157F /* Foundation.framework in Frameworks */,
+				CDB496B8157E572F00C2157F /* libObjectMapper.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CDB49695157E572E00C2157F = {
+			isa = PBXGroup;
+			children = (
+				CDB496A5157E572E00C2157F /* ObjectMapper */,
+				CDB496B9157E572F00C2157F /* ObjectMapperTests */,
+				CDB496A2157E572E00C2157F /* Frameworks */,
+				CDB496A1157E572E00C2157F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CDB496A1157E572E00C2157F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CDB496A0157E572E00C2157F /* libObjectMapper.a */,
+				CDB496B0157E572F00C2157F /* ObjectMapperTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CDB496A2157E572E00C2157F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CDB496A3157E572E00C2157F /* Foundation.framework */,
+				CDB496B1157E572F00C2157F /* SenTestingKit.framework */,
+				CDB496B3157E572F00C2157F /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CDB496A5157E572E00C2157F /* ObjectMapper */ = {
+			isa = PBXGroup;
+			children = (
+				CDB496D0157E57C400C2157F /* ObjectMapper.h */,
+				CDB496D1157E57C400C2157F /* ObjectMapper.m */,
+				CDB496A6157E572E00C2157F /* Supporting Files */,
+			);
+			path = ObjectMapper;
+			sourceTree = "<group>";
+		};
+		CDB496A6157E572E00C2157F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDB496A7157E572E00C2157F /* ObjectMapper-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDB496B9157E572F00C2157F /* ObjectMapperTests */ = {
+			isa = PBXGroup;
+			children = (
+				CDB496D6157E581200C2157F /* JSONKit.h */,
+				CDB496D7157E581200C2157F /* JSONKit.m */,
+				CDB496D9157E581200C2157F /* ObjectMapperTest.h */,
+				CDB496DA157E581200C2157F /* ObjectMapperTest.m */,
+				CDB496DB157E581200C2157F /* ObjectWithArrayTypes.h */,
+				CDB496DC157E581200C2157F /* ObjectWithArrayTypes.m */,
+				CDB496DD157E581200C2157F /* ObjectWithBasicTypes.h */,
+				CDB496DE157E581200C2157F /* ObjectWithBasicTypes.m */,
+				CDB4971E158390F100C2157F /* AnnotatedObjectWithBasicTypes.h */,
+				CDB4971F158390F100C2157F /* AnnotatedObjectWithBasicTypes.m */,
+				CDB496DF157E581200C2157F /* ObjectWithBuiltInTypes.h */,
+				CDB496E0157E581200C2157F /* ObjectWithBuiltInTypes.m */,
+				CDB496E1157E581200C2157F /* ObjectWithMissingObject.h */,
+				CDB496E2157E581200C2157F /* ObjectWithMissingObject.m */,
+				CDB496E3157E581200C2157F /* ObjectWithObjectTypes.h */,
+				CDB496E4157E581200C2157F /* ObjectWithObjectTypes.m */,
+				CDB496E5157E581200C2157F /* ObjectWithSomeNullValues.h */,
+				CDB496E6157E581200C2157F /* ObjectWithSomeNullValues.m */,
+				CDB496E7157E581200C2157F /* RuntimeReporter.h */,
+				CDB496E8157E581200C2157F /* RuntimeReporter.m */,
+				CDB496E9157E581200C2157F /* ArrayWithObjectTypes.json */,
+				CDB496EA157E581200C2157F /* ObjectWithArrayTypes.json */,
+				CDB496EB157E581200C2157F /* ObjectWithBasicTypes.json */,
+				CDB496EC157E581200C2157F /* ObjectWithBasicTypesMissingProperties.json */,
+				CDB496ED157E581200C2157F /* ObjectWithMissingObject.json */,
+				CDB496EE157E581200C2157F /* ObjectWithObjectTypes.json */,
+				CDB496EF157E581200C2157F /* ObjectWithSomeNullValues.json */,
+				CDB496BA157E572F00C2157F /* Supporting Files */,
+			);
+			path = ObjectMapperTests;
+			sourceTree = "<group>";
+		};
+		CDB496BA157E572F00C2157F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CDB496BB157E572F00C2157F /* ObjectMapperTests-Info.plist */,
+				CDB496BC157E572F00C2157F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		CDB4969E157E572E00C2157F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB496D2157E57C400C2157F /* ObjectMapper.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		CDB4969F157E572E00C2157F /* ObjectMapper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDB496C4157E572F00C2157F /* Build configuration list for PBXNativeTarget "ObjectMapper" */;
+			buildPhases = (
+				CDB4969C157E572E00C2157F /* Sources */,
+				CDB4969D157E572E00C2157F /* Frameworks */,
+				CDB4969E157E572E00C2157F /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ObjectMapper;
+			productName = ObjectMapper;
+			productReference = CDB496A0157E572E00C2157F /* libObjectMapper.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		CDB496AF157E572F00C2157F /* ObjectMapperTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CDB496C7157E572F00C2157F /* Build configuration list for PBXNativeTarget "ObjectMapperTests" */;
+			buildPhases = (
+				CDB496AB157E572F00C2157F /* Sources */,
+				CDB496AC157E572F00C2157F /* Frameworks */,
+				CDB496AD157E572F00C2157F /* Resources */,
+				CDB496AE157E572F00C2157F /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CDB496B7157E572F00C2157F /* PBXTargetDependency */,
+			);
+			name = ObjectMapperTests;
+			productName = ObjectMapperTests;
+			productReference = CDB496B0157E572F00C2157F /* ObjectMapperTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CDB49697157E572E00C2157F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = CDB4969A157E572E00C2157F /* Build configuration list for PBXProject "ObjectMapper" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = CDB49695157E572E00C2157F;
+			productRefGroup = CDB496A1157E572E00C2157F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CDB4969F157E572E00C2157F /* ObjectMapper */,
+				CDB496AF157E572F00C2157F /* ObjectMapperTests */,
+				CDB49722158426DE00C2157F /* Documentation */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CDB496AD157E572F00C2157F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB496BE157E572F00C2157F /* InfoPlist.strings in Resources */,
+				CDB4970C157E581200C2157F /* ArrayWithObjectTypes.json in Resources */,
+				CDB4970D157E581200C2157F /* ObjectWithArrayTypes.json in Resources */,
+				CDB4970E157E581200C2157F /* ObjectWithBasicTypes.json in Resources */,
+				CDB4970F157E581200C2157F /* ObjectWithBasicTypesMissingProperties.json in Resources */,
+				CDB49710157E581200C2157F /* ObjectWithMissingObject.json in Resources */,
+				CDB49711157E581200C2157F /* ObjectWithObjectTypes.json in Resources */,
+				CDB49712157E581200C2157F /* ObjectWithSomeNullValues.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CDB496AE157E572F00C2157F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		CDB49726158426E400C2157F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/appledoc --project-name JsonORM --project-company \"Wadpam\" --company-id com.wadpam --output $SOURCE_ROOT/Doc --no-repeat-first-par --explicit-crossref --no-install-docset --keep-intermediate-files $SOURCE_ROOT/ObjectMapper/.";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CDB4969C157E572E00C2157F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB496D3157E57C400C2157F /* ObjectMapper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CDB496AB157E572F00C2157F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CDB496F2157E581200C2157F /* JSONKit.m in Sources */,
+				CDB496F6157E581200C2157F /* ObjectMapperTest.m in Sources */,
+				CDB496F9157E581200C2157F /* ObjectWithArrayTypes.m in Sources */,
+				CDB496FC157E581200C2157F /* ObjectWithBasicTypes.m in Sources */,
+				CDB496FF157E581200C2157F /* ObjectWithBuiltInTypes.m in Sources */,
+				CDB49702157E581200C2157F /* ObjectWithMissingObject.m in Sources */,
+				CDB49705157E581200C2157F /* ObjectWithObjectTypes.m in Sources */,
+				CDB49708157E581200C2157F /* ObjectWithSomeNullValues.m in Sources */,
+				CDB4970B157E581200C2157F /* RuntimeReporter.m in Sources */,
+				CDB49720158390F200C2157F /* AnnotatedObjectWithBasicTypes.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CDB496B7157E572F00C2157F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CDB4969F157E572E00C2157F /* ObjectMapper */;
+			targetProxy = CDB496B6157E572F00C2157F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CDB496BC157E572F00C2157F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CDB496BD157E572F00C2157F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CDB496C2157E572F00C2157F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CDB496C3157E572F00C2157F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CDB496C5157E572F00C2157F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ObjectMapper.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectMapper/ObjectMapper-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CDB496C6157E572F00C2157F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DSTROOT = /tmp/ObjectMapper.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectMapper/ObjectMapper-Prefix.pch";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		CDB496C8157E572F00C2157F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectMapper/ObjectMapper-Prefix.pch";
+				INFOPLIST_FILE = "ObjectMapperTests/ObjectMapperTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		CDB496C9157E572F00C2157F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ObjectMapper/ObjectMapper-Prefix.pch";
+				INFOPLIST_FILE = "ObjectMapperTests/ObjectMapperTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		CDB49724158426DF00C2157F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CDB49725158426DF00C2157F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CDB4969A157E572E00C2157F /* Build configuration list for PBXProject "ObjectMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDB496C2157E572F00C2157F /* Debug */,
+				CDB496C3157E572F00C2157F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDB496C4157E572F00C2157F /* Build configuration list for PBXNativeTarget "ObjectMapper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDB496C5157E572F00C2157F /* Debug */,
+				CDB496C6157E572F00C2157F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDB496C7157E572F00C2157F /* Build configuration list for PBXNativeTarget "ObjectMapperTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDB496C8157E572F00C2157F /* Debug */,
+				CDB496C9157E572F00C2157F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CDB49723158426DF00C2157F /* Build configuration list for PBXAggregateTarget "Documentation" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CDB49724158426DF00C2157F /* Debug */,
+				CDB49725158426DF00C2157F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CDB49697157E572E00C2157F /* Project object */;
+}

@@ -1,0 +1,36 @@
+{
+    "arrayOfStrings":["stringValue1", "stringValue2" , "stringValue3"],
+    "arrayOfIntegers":[1,2,3],
+    "arrayOfDecimals":[1.1, 2.2, 3.3],
+    "arrayOfBools":[true,false,true],
+    "arrayOfObjects":
+    [
+        {
+            "string":"stringValue",
+            "integer":12345,
+            "decimal":12.345,
+            "boolean":true
+        },
+        {
+            "string":"stringValue",
+            "integer":12345,
+            "decimal":12.345,
+            "boolean":true
+     }
+    ],
+    "arrayOfMissingObjects":
+    [
+        {
+            "string":"stringValue",
+            "integer":12345,
+            "decimal":12.345,
+            "boolean":true
+        },
+        {
+            "string":"stringValue",
+            "integer":12345,
+            "decimal":12.345,
+            "boolean":true
+        }
+     ]
+}

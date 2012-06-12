@@ -1,0 +1,14 @@
+[
+    {
+        "string":"stringValue",
+        "integer":12345,
+        "decimal":12.345,
+        "boolean":true
+    },
+    {
+        "string":"stringValue",
+        "integer":12345,
+        "decimal":12.345,
+        "boolean":true
+    }
+]
