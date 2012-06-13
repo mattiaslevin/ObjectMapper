@@ -7,12 +7,15 @@
 
 #import "AnnotatedObjectWithBasicTypes.h"
 
-@implementation AnnotatedObjectWithBasicTypes
+#define INTEGER integerWithADifferentName
+
+@implementation AnnotatedObjectWithBasicTypes 
 
 
 ANNOTATE_PROPERTY_FOR_KEY(stringWithADifferentName, string)
 @synthesize stringWithADifferentName;
-@synthesize integer;
+ANNOTATE_PROPERTY_FOR_KEY(INTEGER, integer)
+@synthesize integerWithADifferentName;
 @synthesize _decimal;
 @synthesize boolean;
 
@@ -28,9 +31,9 @@ ANNOTATE_PROPERTY_FOR_KEY(stringWithADifferentName, string)
 
 
 - (NSString*)description {
-  return [NSString stringWithFormat:@"stringWithADifferentName=%@, integer=%@, decimal=%@, boolean=%d", 
+  return [NSString stringWithFormat:@"stringWithADifferentName=%@, integerWithADifferentName=%@, decimal=%@, boolean=%d", 
           self.stringWithADifferentName, 
-          self.integer,
+          self.integerWithADifferentName,
           self._decimal,
           self.boolean];                                                                                                
 }
@@ -38,7 +41,7 @@ ANNOTATE_PROPERTY_FOR_KEY(stringWithADifferentName, string)
 
 - (void) dealloc {  
   [stringWithADifferentName release];
-  [integer release];
+  [integerWithADifferentName release];
   [_decimal release];
   
   [super dealloc];

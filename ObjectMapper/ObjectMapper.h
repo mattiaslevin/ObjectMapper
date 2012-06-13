@@ -13,12 +13,15 @@
  Use this macro to annotate a key name to a domain object properties name when the default
  naming conventions can not be followed.
  */
-#define ANNOTATE_PROPERTY_FOR_KEY(property, key) -(NSString*)orm_property_for_key_##key {return @#property;}
+#define ANNOTATE_PROPERTY_FOR_KEY(property, key) XANNOTATE_PROPERTY_FOR_KEY(property, key)  // Force marco-expansion
+#define XANNOTATE_PROPERTY_FOR_KEY(property, key) -(NSString*)orm_property_for_key_##key {return @#property;}
+
 
 /**
  Use this macro to annotate properties of NSArray type with the type of object to store in the arrray.
  */
-#define ANNOTATE_CLASS_FOR_ARRAY(clazz, property) -(Class)orm_class_for_array_##property {return [clazz class];}
+#define ANNOTATE_CLASS_FOR_ARRAY(clazz, property) XANNOTATE_CLASS_FOR_ARRAY(clazz, property)   // Force marco-expansion
+#define XANNOTATE_CLASS_FOR_ARRAY(clazz, property) -(Class)orm_class_for_array_##property {return [clazz class];}
 
 
 /**

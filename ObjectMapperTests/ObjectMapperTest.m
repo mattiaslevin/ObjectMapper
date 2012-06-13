@@ -66,12 +66,16 @@
   
   // Map JSON
   NSError *error = nil;
-  ObjectWithBasicTypes *domainObject = [parsedJSON mapToClass:[AnnotatedObjectWithBasicTypes class] withError:&error];
+  AnnotatedObjectWithBasicTypes *domainObject = [parsedJSON mapToClass:[AnnotatedObjectWithBasicTypes class] withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
+  STAssertTrue([domainObject.stringWithADifferentName isEqualToString:@"stringValue"], 
+               @"The stringWithADifferentName does not contain the correct value");
+  STAssertTrue([domainObject.integerWithADifferentName integerValue] == 12345, 
+               @"The integerWithADifferentName does not contain the correct value");
   STAssertNil(error, @"NSError object was returned");
 }
 

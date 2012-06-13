@@ -11,7 +11,7 @@
 @interface AnnotatedObjectWithBasicTypes : NSObject
 
 @property (retain) NSString *stringWithADifferentName;
-@property (retain) NSNumber *integer;
+@property (retain) NSNumber *integerWithADifferentName;
 @property (retain) NSNumber *_decimal;
 @property BOOL boolean;
 
