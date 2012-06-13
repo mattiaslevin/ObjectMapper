@@ -57,6 +57,11 @@
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
   STAssertNil(error, @"NSError object was returned");
+  // Check individual property values  
+  STAssertTrue([domainObject.string isEqualToString:@"stringValue"], @"The string property have the wrong value");
+  STAssertTrue([domainObject.integer integerValue] == 12345, @"The integer property have the wrong value");
+  STAssertTrue([domainObject._decimal floatValue] == 12.345f, @"The _decimal property have the wrong value");
+  STAssertTrue(domainObject.boolean == YES, @"The boolean property have the wrong value");
 }
 
 
@@ -72,11 +77,14 @@
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
+  STAssertNil(error, @"NSError object was returned");
+  // Check individual property values
   STAssertTrue([domainObject.stringWithADifferentName isEqualToString:@"stringValue"], 
                @"The stringWithADifferentName does not contain the correct value");
   STAssertTrue([domainObject.integerWithADifferentName integerValue] == 12345, 
                @"The integerWithADifferentName does not contain the correct value");
-  STAssertNil(error, @"NSError object was returned");
+  STAssertTrue([domainObject._decimal floatValue] == 12.345f, @"The _decimal property have the wrong value");
+  STAssertTrue(domainObject.boolean == YES, @"The boolean property have the wrong value");
 }
 
 

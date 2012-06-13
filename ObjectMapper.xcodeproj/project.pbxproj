@@ -175,12 +175,12 @@
 				CDB496D7157E581200C2157F /* JSONKit.m */,
 				CDB496D9157E581200C2157F /* ObjectMapperTest.h */,
 				CDB496DA157E581200C2157F /* ObjectMapperTest.m */,
-				CDB496DB157E581200C2157F /* ObjectWithArrayTypes.h */,
-				CDB496DC157E581200C2157F /* ObjectWithArrayTypes.m */,
 				CDB496DD157E581200C2157F /* ObjectWithBasicTypes.h */,
 				CDB496DE157E581200C2157F /* ObjectWithBasicTypes.m */,
 				CDB4971E158390F100C2157F /* AnnotatedObjectWithBasicTypes.h */,
 				CDB4971F158390F100C2157F /* AnnotatedObjectWithBasicTypes.m */,
+				CDB496DB157E581200C2157F /* ObjectWithArrayTypes.h */,
+				CDB496DC157E581200C2157F /* ObjectWithArrayTypes.m */,
 				CDB496DF157E581200C2157F /* ObjectWithBuiltInTypes.h */,
 				CDB496E0157E581200C2157F /* ObjectWithBuiltInTypes.m */,
 				CDB496E1157E581200C2157F /* ObjectWithMissingObject.h */,
@@ -191,9 +191,9 @@
 				CDB496E6157E581200C2157F /* ObjectWithSomeNullValues.m */,
 				CDB496E7157E581200C2157F /* RuntimeReporter.h */,
 				CDB496E8157E581200C2157F /* RuntimeReporter.m */,
+				CDB496EB157E581200C2157F /* ObjectWithBasicTypes.json */,
 				CDB496E9157E581200C2157F /* ArrayWithObjectTypes.json */,
 				CDB496EA157E581200C2157F /* ObjectWithArrayTypes.json */,
-				CDB496EB157E581200C2157F /* ObjectWithBasicTypes.json */,
 				CDB496EC157E581200C2157F /* ObjectWithBasicTypesMissingProperties.json */,
 				CDB496ED157E581200C2157F /* ObjectWithMissingObject.json */,
 				CDB496EE157E581200C2157F /* ObjectWithObjectTypes.json */,
@@ -529,6 +529,7 @@
 				CDB49725158426DF00C2157F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

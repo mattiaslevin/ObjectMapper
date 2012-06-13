@@ -9,10 +9,10 @@
 
 @implementation ObjectWithBasicTypes
 
-@synthesize string;
-@synthesize integer;
-@synthesize _decimal;
-@synthesize boolean;
+@synthesize string = string_;
+@synthesize integer = integer_;
+@synthesize _decimal = _decimal_;
+@synthesize boolean = boolean_;
 
 - (id)init {
   self = [super init];
@@ -34,10 +34,9 @@
 
 
 - (void) dealloc {  
-  [string release];
-  [integer release];
-  [_decimal release];
-  
+  self.string = nil;
+  self.integer = nil;
+  self._decimal = nil;
   [super dealloc];
 }
 

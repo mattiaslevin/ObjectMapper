@@ -7,12 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ObjectWithBasicTypes : NSObject {
-    NSString *string;
-    NSNumber *integer;
-    NSNumber *_decimal;
-    BOOL boolean;
-}
+@interface ObjectWithBasicTypes : NSObject
 
 @property (retain) NSString *string;
 @property (retain) NSNumber *integer;

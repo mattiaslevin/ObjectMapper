@@ -13,11 +13,13 @@
 
 
 ANNOTATE_PROPERTY_FOR_KEY(stringWithADifferentName, string)
-@synthesize stringWithADifferentName;
+@synthesize stringWithADifferentName = stringWithADifferentName_;
+
 ANNOTATE_PROPERTY_FOR_KEY(INTEGER, integer)
-@synthesize integerWithADifferentName;
-@synthesize _decimal;
-@synthesize boolean;
+@synthesize integerWithADifferentName = integerWithADifferentName_;
+
+@synthesize _decimal = _decimal_;
+@synthesize boolean = boolean_;
 
 
 - (id)init {
@@ -40,10 +42,9 @@ ANNOTATE_PROPERTY_FOR_KEY(INTEGER, integer)
 
 
 - (void) dealloc {  
-  [stringWithADifferentName release];
-  [integerWithADifferentName release];
-  [_decimal release];
-  
+  self.stringWithADifferentName = nil;
+  self.integerWithADifferentName = nil;
+  self._decimal = nil;
   [super dealloc];
 }
 
