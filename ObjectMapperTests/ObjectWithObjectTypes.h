@@ -9,14 +9,9 @@
 
 @class ObjectWithBasicTypes;
 
-@interface ObjectWithObjectTypes : NSObject {
-    ObjectWithBasicTypes *object1;
-    ObjectWithBasicTypes *object2;
-}
+@interface ObjectWithObjectTypes : NSObject
 
-
-@property (retain) ObjectWithBasicTypes *object1;
-@property (retain) ObjectWithBasicTypes *object2;
-
+@property (nonatomic, retain) ObjectWithBasicTypes *object1;
+@property (nonatomic, retain) ObjectWithBasicTypes *object2;
 
 @end

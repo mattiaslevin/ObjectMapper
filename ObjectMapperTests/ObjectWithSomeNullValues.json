@@ -4,12 +4,12 @@
     "integer":12345,
     "decimal":12.345,
     "boolean":true,
-    "stringNull":null,
-    "integerNull":null,
-    "decimalNull":null,
+    "stringNil":null,
+    "integerNil":null,
+    "decimalNil":null,
     
     "arrayOfStrings":["stringValue1", "stringValue2" , "stringValue3"],
-    "arrayNullOfStrings":null,
+    "arrayOfStringsNil":null,
 
     "object":
     {
@@ -18,7 +18,7 @@
         "decimal":12.345,
         "boolean":true
     },
-    "objectNull":null
+    "objectNil":null
     
 }
     

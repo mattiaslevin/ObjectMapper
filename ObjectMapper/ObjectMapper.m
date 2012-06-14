@@ -276,9 +276,11 @@ typedef enum {
           [self map:valueArray toArray:&targetPropertyValue withBasicType:[[valueArray objectAtIndex:0] class] error:error];
         
         break;
+      case Null:
+        value = nil;
+        break;
       case String:               
       case Number:              
-      case Null:
         DLOG(@"Value is of basic type");        
         targetPropertyValue = [self mapToBasicType:[source valueForKey:key] error:error];
         if(targetPropertyValue == nil) { 
@@ -350,10 +352,7 @@ typedef enum {
       break;
     case Number:
       DLOG(@"Basic type is a Number of type %s", [source objCType]);
-      break;
-    case Null:
-      DLOG(@"Basic type is a Null value");
-      break;            
+      break;  
     default:
       *error = [self parsingErrorWithDescription:@"Basic type is of unkonw type %@", source];
       return nil;

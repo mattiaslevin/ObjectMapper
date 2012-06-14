@@ -10,36 +10,34 @@
 @implementation ObjectWithArrayTypes
 
 
-@synthesize arrayOfStrings;
-@synthesize arrayOfIntegers;
-@synthesize arrayOfDecimals;
-@synthesize arrayOfBools;
+@synthesize arrayOfStrings = arrayOfStrings_;
+@synthesize arrayOfIntegers = arrayOfIntegers_;
+@synthesize arrayOfDecimals = arrayOfDecimals_;
+@synthesize arrayOfBools = arrayOfBools_;
 
 ANNOTATE_CLASS_FOR_ARRAY(ObjectWithBasicTypes, arrayOfObjects)
-@synthesize arrayOfObjects;
+@synthesize arrayOfObjects = arrayOfObjects_;
 
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+- (id)init {
+  self = [super init];
+  if (self) {
+    // Initialization code here.
+  }
+  
+  return self;
 }
 
 
-- (void)dealloc
-{
-    [arrayOfStrings release];
-    [arrayOfIntegers release];
-    [arrayOfDecimals release];
-    [arrayOfBools release];
-    [arrayOfObjects release];
-    
-    [super dealloc];
+- (void)dealloc {
+  self.arrayOfStrings = nil;
+  self.arrayOfIntegers = nil;
+  self.arrayOfDecimals = nil;
+  self.arrayOfBools = nil;
+  self.arrayOfObjects = nil;
+  [super dealloc];
 }
+
 
 @end
 

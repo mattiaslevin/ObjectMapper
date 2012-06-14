@@ -12,7 +12,7 @@
 #import "AnnotatedObjectWithBasicTypes.h"
 #import "ObjectWithObjectTypes.h"
 #import "ObjectWithArrayTypes.h"
-#import "ObjectWithSomeNullValues.h"
+#import "ObjectWithSomeNilValues.h"
 #import "ObjectWithMissingObject.h"
 #import "RuntimeReporter.h"
 #import "ObjectWithBuiltInTypes.h"
@@ -103,6 +103,33 @@
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
   STAssertNil(error, @"NSError object was returned");
+  // Check individual property values
+  STAssertTrue([domainObject.string isEqualToString:@"stringValue"], @"The string property have the wrong value");
+  STAssertTrue([domainObject.integer integerValue] == 12345, @"The integer property have the wrong value");
+  STAssertTrue([domainObject._decimal floatValue] == 12.345f, @"The _decimal property have the wrong value");
+  STAssertTrue(domainObject.boolean == YES, @"The boolean property have the wrong value");
+}
+
+
+- (void)testObjectWithBasicTypesMissingJSONAttribute {
+  // Get test data
+  id parsedJSON = [self parsedJsonFromFileWithName:@"ObjectWithBasicTypesMissingJSONAttribute.json"];
+  
+  // Map JSON
+  ObjectMapper *mapper = [ObjectMapper mapper];
+  NSError *error = nil;
+  ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
+  
+  NSLog(@"Mapped object: %@", domainObject);
+  
+  // Check the result
+  STAssertNotNil(domainObject, @"Domain object is nil");
+  STAssertNil(error, @"NSError object was returned");
+  // Check individual property values
+  STAssertTrue(domainObject.string == nil, @"The string property should be nil");
+  STAssertTrue([domainObject.integer integerValue] == 12345, @"The integer property have the wrong value");
+  STAssertTrue([domainObject._decimal floatValue] == 12.345f, @"The _decimal property have the wrong value");
+  STAssertTrue(domainObject.boolean == YES, @"The boolean property have the wrong value");
 }
 
 
@@ -113,13 +140,23 @@
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
-  ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithObjectTypes class] withError:&error];
+  ObjectWithObjectTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithObjectTypes class] withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
   STAssertNil(error, @"NSError object was returned");
+  // Check individual property values
+  STAssertTrue([domainObject.object1 isKindOfClass:[ObjectWithBasicTypes class]], @"Object1 is of the wrong type");
+  STAssertNotNil(domainObject.object1, @"Object1 should not be nil");
+  STAssertTrue([domainObject.object1.string isEqualToString:@"stringValue"], @"The string property in object1 have the wrong value");
+  
+  STAssertTrue([domainObject.object2 isKindOfClass:[ObjectWithBasicTypes class]], @"Object2 is of the wrong type");
+  STAssertNotNil(domainObject.object2, @"Object2 should not be nil");
+  STAssertTrue([domainObject.object2.string isEqualToString:@"stringValue2"], 
+               @"The string property in object2 have the wrong value");
+  STAssertTrue(domainObject.object2.boolean == NO, @"The boolean property object2 have the wrong value");
 }
 
 
@@ -127,20 +164,38 @@
   // Get test data
   id parsedJSON = [self parsedJsonFromFileWithName:@"ObjectWithArrayTypes.json"];
   
-  NSArray *methods = [RuntimeReporter methodNamesForClass:[ObjectWithArrayTypes class]];
-  NSLog(@"Methods %@", methods);
-                    
-  
   //Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
-  ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithArrayTypes class] withError:&error];
+  ObjectWithArrayTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithArrayTypes class] withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
   
   //Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
   STAssertNil(error, @"NSError object was returned");
+  // Check individual property values
+  STAssertTrue([domainObject.arrayOfStrings count] == 3, @"The arrayOfStrings did not contain 3 strings");
+  STAssertTrue([[domainObject.arrayOfStrings objectAtIndex:0] isEqualToString:@"stringValue1"], 
+               @"The first element in the arrayOfStrings have the wrong value");
+  STAssertTrue([[domainObject.arrayOfStrings objectAtIndex:1] isEqualToString:@"stringValue2"], 
+               @"The second element in the arrayOfStrings have the wrong value");
+  STAssertTrue([[domainObject.arrayOfStrings objectAtIndex:2] isEqualToString:@"stringValue3"], 
+               @"The third element in the arrayOfStrings have the wrong value");
+  STAssertTrue([domainObject.arrayOfIntegers count] == 3, @"The arrayOfIntegers did not contain 3 integers");
+  STAssertTrue([[domainObject.arrayOfIntegers objectAtIndex:2] integerValue]== 3, 
+               @"The third element in the arrayOfIntegers have the wrong value");
+  STAssertTrue([domainObject.arrayOfDecimals count] == 3, @"The arrayOfDecimals did not contain 3 decimals");
+  STAssertTrue([[domainObject.arrayOfDecimals objectAtIndex:2] floatValue] == 3.3f, 
+               @"The third element in the arrayOfDecimals have the wrong value");
+  STAssertTrue([domainObject.arrayOfBools count] == 3, @"The arrayOfBools did not contain 3 booleans");
+  STAssertTrue([[domainObject.arrayOfBools objectAtIndex:2] boolValue] == YES, 
+               @"The third element in the arrayOfBools have the wrong value");
+  STAssertTrue([domainObject.arrayOfObjects count] == 2, @"The arrayOfObjects did not contain 2 objects");
+  STAssertTrue([[domainObject.arrayOfObjects objectAtIndex:0] isKindOfClass:[ObjectWithBasicTypes class]], 
+               @"The first element in the arrayOfObjects contains the wrong type");
+  STAssertTrue([((ObjectWithBasicTypes*)[domainObject.arrayOfObjects objectAtIndex:1]).string isEqualToString:@"stringValue1"], 
+               @"The string parameter in the second element in the arrayOfObjects contains the wrong value");
 }
 
 
@@ -151,31 +206,59 @@
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
-  ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithSomeNullValues class] withError:&error];
+  ObjectWithSomeNilValues *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithSomeNilValues class] withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
-  STAssertNil(error, @"NSError object was returned");  
+  STAssertNil(error, @"NSError object was returned");
+  // Check individual property values  
+  STAssertTrue([domainObject.string isEqualToString:@"stringValue"], @"The string property have the wrong value");
+  STAssertTrue([domainObject.integer integerValue] == 12345, @"The integer property have the wrong value");
+  STAssertTrue([domainObject._decimal floatValue] == 12.345f, @"The _decimal property have the wrong value");
+  STAssertTrue(domainObject.boolean == YES, @"The boolean property have the wrong value");
+  
+  STAssertNil(domainObject.stringNil, @"The stringNil property have the wrong value");
+  STAssertNil(domainObject.integerNil, @"The integerNil property have the wrong value");
+  STAssertNil(domainObject.decimalNil, @"The _decimalNil property have the wrong value");
+  
+  STAssertTrue([domainObject.arrayOfStrings count] == 3, @"The arrayOfStrings should contain 3 items");
+  STAssertNil(domainObject.arrayOfStringsNil, @"The arrayOfStringsNil property have the wrong value");
+  
+  STAssertTrue([domainObject.object isKindOfClass:[ObjectWithBasicTypes class]], 
+               @"The object property copntains the wrong type");
+  STAssertNil(domainObject.objectNil, @"The objectNil property have the wrong value");
 }
 
 
-//
+
 - (void)testArrayWithObjectTypes {    
-    // Get test data
-    id parsedJSON = [self parsedJsonFromFileWithName:@"ArrayWithObjectTypes.json"];
-    
-    // Map JSON
-    ObjectMapper *mapper = [ObjectMapper mapper];
-    NSError *error = nil;
-    ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
-    
-    NSLog(@"Mapped object: %@", domainObject);
-    
-    // Check the result
-    STAssertNotNil(domainObject, @"Domain object is nil");
-    STAssertNil(error, @"Error object is not nil");    
+  // Get test data
+  id parsedJSON = [self parsedJsonFromFileWithName:@"ArrayWithObjectTypes.json"];
+  
+  // Map JSON
+  ObjectMapper *mapper = [ObjectMapper mapper];
+  NSError *error = nil;
+  NSArray *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
+  
+  NSLog(@"Mapped object: %@", domainObject);
+  
+  // Check the result
+  STAssertNotNil(domainObject, @"Domain object is nil");
+  STAssertNil(error, @"Error object is not nil");  
+  STAssertTrue([domainObject isKindOfClass:[NSArray class]], @"The returned domain object is the wrong type");
+  // Check individual property values  
+  STAssertTrue([domainObject count] == 2, @"The returned array does not contain 2 elements");
+  ObjectWithBasicTypes *basicObject = [domainObject objectAtIndex:0];
+  STAssertTrue([basicObject.string isEqualToString:@"stringValue"], 
+               @"The first object in the array have wrong string value");
+  STAssertTrue([basicObject.integer integerValue] == 12345, @"The first object in the array have wrong integer value");
+  
+  basicObject = [domainObject objectAtIndex:1];
+  STAssertTrue([basicObject.string isEqualToString:@"stringValue2"], 
+               @"The second object in the array have wrong string value");
+  STAssertTrue([basicObject.integer integerValue] == 123456, @"The second object in the array have wrong integer value");
 }
 
 
@@ -370,7 +453,7 @@
   STAssertNil(domainObject, @"Domain object should be nil");
   STAssertNotNil(error, @"NSError object should be returned"); 
   NSLog(@"Error description: %@", [error description]);
-
+  
 }
 
 

@@ -6,9 +6,9 @@
         "boolean":true
     },
     {
-        "string":"stringValue",
-        "integer":12345,
-        "decimal":12.345,
-        "boolean":true
+        "string":"stringValue2",
+        "integer":123456,
+        "decimal":12.3456,
+        "boolean":false
     }
 ]

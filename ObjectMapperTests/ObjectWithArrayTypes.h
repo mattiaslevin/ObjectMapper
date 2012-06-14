@@ -9,22 +9,13 @@
 #import "ObjectWithBasicTypes.h"
 #import "ObjectMapper.h"
 
-@interface ObjectWithArrayTypes : NSObject {
-    
-    
-    NSArray *arrayOfStrings;
-    NSArray *arrayOfIntegers;
-    NSArray *arrayOfDecimals;
-    NSArray *arrayOfBool;    
-    NSArray *arrayOfObjects;
-    
-}
+@interface ObjectWithArrayTypes : NSObject
 
-@property (retain) NSArray *arrayOfStrings;
-@property (retain) NSArray *arrayOfIntegers;
-@property (retain) NSArray *arrayOfDecimals;
-@property (retain) NSArray *arrayOfBools;
-@property (retain) NSArray *arrayOfObjects; 
+@property (nonatomic, retain) NSArray *arrayOfStrings;
+@property (nonatomic, retain) NSArray *arrayOfIntegers;
+@property (nonatomic, retain) NSArray *arrayOfDecimals;
+@property (nonatomic, retain) NSArray *arrayOfBools;
+@property (nonatomic, retain) NSArray *arrayOfObjects; 
 
 @end
 
