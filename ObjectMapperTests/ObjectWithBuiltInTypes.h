@@ -8,15 +8,9 @@
 #import <Foundation/Foundation.h>
 
 @interface ObjectWithBuiltInTypes : NSObject 
-{
-    int anInteger;
-    double aDouble;
-    BOOL aBoolean;
-}
 
-
-@property int anInteger;
-@property double aDouble;
-@property BOOL aBoolean;
+@property (nonatomic) int anInteger;
+@property (nonatomic) double aDouble;
+@property (nonatomic) BOOL aBoolean;
 
 @end

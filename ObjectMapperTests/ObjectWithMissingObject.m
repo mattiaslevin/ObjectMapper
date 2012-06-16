@@ -9,35 +9,34 @@
 
 @implementation ObjectWithMissingObject
 
-@synthesize arrayOfStrings;
-@synthesize arrayOfIntegers;
-@synthesize arrayOfDecimals;
-@synthesize arrayOfBools;
+@synthesize arrayOfStrings = arrayOfStrings_;
+@synthesize arrayOfIntegers = arrayOfIntegers_;
+@synthesize arrayOfDecimals = arrayOfDecimals_;
+@synthesize arrayOfBools = arrayOfBools_;
 ANNOTATE_CLASS_FOR_ARRAY(ObjectWithBasicTypes, arrayOfObjects)
-@synthesize arrayOfObjects;
-@synthesize arrayOfMissingObjects;
+@synthesize arrayOfObjects = arrayOfObjects_;
+@synthesize arrayOfMissingObjects = arrayOfMissingObjects_;
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+
+- (id)init {
+  self = [super init];
+  if (self) {
+    // Initialization code here.
+  }
+  
+  return self;
 }
 
 
-- (void)dealloc
-{
-    [arrayOfStrings release];
-    [arrayOfIntegers release];
-    [arrayOfDecimals release];
-    [arrayOfBools release];
-    [arrayOfObjects release];
-    [arrayOfMissingObjects release];
-    
-    [super dealloc];
+- (void)dealloc {
+  self.arrayOfStrings = nil;
+  self.arrayOfIntegers = nil;
+  self.arrayOfDecimals = nil;
+  self.self.arrayOfBools = nil;
+  self.arrayOfObjects = nil;
+  self.arrayOfMissingObjects = nil;
+  
+  [super dealloc];
 }
 @end
 

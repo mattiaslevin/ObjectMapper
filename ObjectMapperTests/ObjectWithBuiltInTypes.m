@@ -9,24 +9,22 @@
 
 @implementation ObjectWithBuiltInTypes
 
-@synthesize anInteger;
-@synthesize aDouble;
-@synthesize aBoolean;
+@synthesize anInteger = anInteger_;
+@synthesize aDouble = aDouble_;
+@synthesize aBoolean = aBoolean_;
 
-- (id)init
-{
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+- (id)init {
+  self = [super init];
+  if (self) {
+    // Initialization code here.
+  }
+  
+  return self;
 }
 
 
-- (NSString*)description
-{
-    return [NSString stringWithFormat:@"Int: %d Double: %f Bool: %d", self.anInteger, self.aDouble, self.aBoolean];
+- (NSString*)description {
+  return [NSString stringWithFormat:@"Int: %d Double: %f Bool: %d", self.anInteger, self.aDouble, self.aBoolean];
 }
 
 @end

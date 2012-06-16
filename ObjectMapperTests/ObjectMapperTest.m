@@ -277,8 +277,12 @@
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
-  STAssertTrue(([domainObject count] == 4), @"The domain object should contain 4 strings");
   STAssertNil(error, @"NSError object was returned");
+  STAssertTrue(([domainObject count] == 4), @"The domain object should contain 4 strings");
+  STAssertTrue([[domainObject objectAtIndex:0] isKindOfClass:[NSString class]], 
+               @"The first element of the array if of wrong type");
+  STAssertTrue([[domainObject objectAtIndex:1] isEqualToString:@"string2"], 
+               @"The second element on the array contains wrong value");
 }
 
 
@@ -297,8 +301,12 @@
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
-  STAssertTrue(([domainObject count] == 4), @"The domain object should contain 4 integers");
   STAssertNil(error, @"NSError object was returned");
+  STAssertTrue(([domainObject count] == 4), @"The domain object should contain 4 integers");
+  STAssertTrue([[domainObject objectAtIndex:0] isKindOfClass:[NSNumber class]], 
+               @"The first element of the array if of wrong type");
+  STAssertTrue([[domainObject objectAtIndex:1] integerValue] == 222, 
+               @"The second element on the array contains wrong value");
 }
 
 
@@ -311,13 +319,16 @@
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
-  NSArray *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBuiltInTypes class] withError:&error];
+  ObjectWithBuiltInTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBuiltInTypes class] withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
   STAssertNil(error, @"NSError object was returned");
+  STAssertTrue(domainObject.anInteger == 11, @"The integer contains wrong value");
+  STAssertTrue(domainObject.aDouble == 12.23, @"The double contains wrong value");
+  STAssertFalse(domainObject.aBoolean, @"The boolean contains wrong value");
 }
 
 
@@ -448,12 +459,11 @@
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:nil withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
-  
+  NSLog(@"Error description: %@", [error description]);
+
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
-  STAssertNotNil(error, @"NSError object should be returned"); 
-  NSLog(@"Error description: %@", [error description]);
-  
+  STAssertNotNil(error, @"NSError object should be returned");   
 }
 
 
@@ -467,12 +477,13 @@
   ObjectWithMissingObject *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithMissingObject class] withError:&error];
   
   NSLog(@"Mapped object: %@", domainObject);
-  
+  NSLog(@"Error description: %@", [error description]);
+
   // Check the result
   STAssertNil(domainObject, @"Domain object is not nil");
-  STAssertNotNil(error, @"Error object is nil");    
-  // NSLog(@"Error description: %@", [error description]); TODO
-}
+  STAssertNotNil(error, @"Error object is nil");  
+}  
+
 
 
 
@@ -511,7 +522,6 @@
   
   return parsedJSON;
 }
-
 
 
 @end

@@ -167,6 +167,7 @@ typedef enum {
   if (*error) {
     // An error was raised during the recursive mapping
     DLOG(@"Mapping failed with error %@", [*error description]);
+    [*error autorelease];
     return nil;
   } else {   
     // Mapping was successful
@@ -442,7 +443,7 @@ typedef enum {
   NSDictionary *errorInfo = [NSDictionary dictionaryWithObjectsAndKeys: 
                              NSLocalizedDescriptionKey, formatString,
                              nil];
-  return [NSError errorWithDomain:@"com.wadpam.JsonORM.ErrorDomain" code:1 userInfo:errorInfo];
+  return [[NSError errorWithDomain:@"com.wadpam.ObjectMapper.ErrorDomain" code:1 userInfo:errorInfo] retain];
 }
 
 
