@@ -11,7 +11,7 @@
 // TODO: Support mapping to Core Data object
 
 // Future
-// Add a cache to reduce reflection, if needed add a map as property to save all mappings
+// Add a cache to reduce reflection, if needed add a map as property to save all mappings. How much time would we save?
 // Add code generation of meta data to reduce reflecton
 
 
@@ -20,7 +20,7 @@
 #include <sys/time.h>
 
 // Uncomment the line below to get debug statements
-#define PRINT_DEBUG
+//#define PRINT_DEBUG
 //Debug macros
 #ifdef PRINT_DEBUG
 #  define DLOG(fmt, ...) NSLog( (@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -81,7 +81,7 @@ typedef enum {
 - (Class)classForArrayWithKey:(NSString*)key target:(id)target;
 - (Class)classFromTypeEncoding:(NSString*)typeEncoding;
 - (JSONType)jsonType:(id)source;
-- (double)currentMillisecondTime;
+- (double)timestamp;
 - (NSError*)parsingErrorWithDescription:(NSString*)format, ...;
 
 + (NSArray*)propertyNamesForClass:(Class)aClass;
@@ -119,6 +119,8 @@ typedef enum {
 
 // Map parsed JSON to domain objects
 - (id)mapObject:(id)source toClass:(id)clazz withError:(NSError**)error {
+  double startTimestamp = [self timestamp];
+  #pragma unused(startTimestamp) // Supress compiler warning with logging is disabled
   
   // The root object in the graph
   id root = nil;    
@@ -160,6 +162,9 @@ typedef enum {
       *error = [self parsingErrorWithDescription:@"Not possible to map a parsed JSON root that is a basic type. Root must be an object or array"];
       break;
   }
+  
+  // Measure and log how long the mapping took
+  NSLog(@"Mapping time %f", [self timestamp] - startTimestamp);
 
   if (*error) {
     // An error was raised during the recursive mapping
@@ -428,7 +433,7 @@ typedef enum {
 
 
 // Get a timestamp in milliseconds
-- (double)currentMillisecondTime {  
+- (double)timestamp {  
   struct timeval time; 
   gettimeofday(&time, NULL); 
   return (time.tv_sec * 1000) + (time.tv_usec / 1000); 

@@ -26,6 +26,7 @@
 /**
  Use this macro to map keys to custom converter blocks. Converter blocks will allow converting the value 
  before assigning it to the property.
+ 
  The block must confirm to the following definition id(^)(id), accepting the key value and returning a new
  value that will be assigned to the property.
  */
