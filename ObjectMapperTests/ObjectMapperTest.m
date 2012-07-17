@@ -1,3 +1,4 @@
+
 //
 //  ObjectMapperTest.m
 //
@@ -16,6 +17,7 @@
 #import "ObjectWithMissingObject.h"
 #import "RuntimeReporter.h"
 #import "ObjectWithBuiltInTypes.h"
+#import "ObjectWithDateISO8601.h"
 
 
 @implementation ObjectMapperTest
@@ -31,7 +33,6 @@
   NSFileManager *fm = [NSFileManager defaultManager];
   //NSLog(@"Current path %@", [fm currentDirectoryPath]);    
   self.testDataPath = [[fm currentDirectoryPath] stringByAppendingPathComponent:@"ObjectMapperTests"];
-  
 }
 
 
@@ -485,7 +486,54 @@
 }  
 
 
+-(void) testDateISO8601 {
+  // Get test data
+  id parsedJSON = [self parsedJsonFromFileWithName:@"ObjectWithDateISO8601.json"];
+  
+  // Map JSON
+  ObjectMapper *mapper = [ObjectMapper mapper];
+  NSError *error = nil;
+  ObjectWithDateISO8601 *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithDateISO8601 class] withError:&error];
+  
+  NSLog(@"Mapped object: %@", domainObject);
+  NSLog(@"Error description: %@", [error description]);
+  
+  // Date reference used in the test 
+  // unix: 1342356893 
+  // ISO8601: 2012-07-15T12:54:53Z
+  NSDate *referenceUTCDate = [NSDate dateWithTimeIntervalSince1970:1342356893];
+  
+  NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+  dateFormatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss";
+  NSDate *referenceLocalDate = [dateFormatter dateFromString:@"2012-07-15T12:54:53"];
+  
+  NSTimeZone *timeZone = [NSTimeZone timeZoneForSecondsFromGMT:3600];
+  dateFormatter.timeZone = timeZone;
+  NSDate *referenceUTCPlus1000Date = [dateFormatter dateFromString:@"2012-07-15T12:54:53"];
+  
+  timeZone = [NSTimeZone timeZoneForSecondsFromGMT:-3600];
+  dateFormatter.timeZone = timeZone;
+  NSDate *referenceUTCDMinus1000Date = [dateFormatter dateFromString:@"2012-07-15T12:54:53"];
 
+  // Check the result
+  STAssertTrue([domainObject.date1 isEqualToDate:referenceUTCDate], @"Date 1 (1342356893) is not equal to reference date");
+  STAssertTrue([domainObject.date2 isEqualToDate:referenceLocalDate], @"Date 2 (2012-07-15T12:54:53) is not equal to reference date");
+  STAssertTrue([domainObject.date3 isEqualToDate:referenceUTCDate], @"Date 3 (2012-07-15T12:54:53Z) is not equal to reference date");
+  STAssertTrue([domainObject.date4 isEqualToDate:referenceUTCPlus1000Date], @"Date 4 (2012-07-15T12:54:53+0100) is not equal to reference date");
+  STAssertTrue([domainObject.date5 isEqualToDate:referenceUTCPlus1000Date], @"Date 5 (2012-07-15T12:54:53+01:00) is not equal to reference date");
+  STAssertTrue([domainObject.date6 isEqualToDate:referenceUTCPlus1000Date], @"Date 6 (2012-07-15T12:54:53+01) is not equal to reference date");
+  STAssertTrue([domainObject.date7 isEqualToDate:referenceUTCDMinus1000Date], @"Date 7 (2012-07-15T12:54:53-0100) is not equal to reference date");
+  STAssertTrue([domainObject.date8 isEqualToDate:referenceUTCDate], @"Date 8 Date(1342356893) is not equal to reference date");
+  STAssertTrue([[domainObject.date9 description] isEqualToString:@"2012-07-15 13:54:53 +0000"], 
+               @"Date 9 Date(1342356893+1000) is not equal to reference date");
+  //NSLog(@"Date 9 value %@ and ref value %@", domainObject.date9, referenceUTCPlus1000Date);
+  STAssertTrue([[domainObject.date10 description] isEqualToString:@"2012-07-15 11:54:53 +0000"], 
+               @"Date 10 Date(1342356893-1000) is not equal to reference date");
+  //NSLog(@"Date 10 value %@ and ref value %@", domainObject.date10, referenceUTCDMinus1000Date);
+  
+  STAssertNotNil(domainObject, @"Domain object is nil");
+  STAssertNil(error, @"Error object is not nil");
+}  
 
 
 //- (void) testClassMethods

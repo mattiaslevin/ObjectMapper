@@ -10,34 +10,48 @@
 
 
 /**
- Use this macro to annotate a key name to a domain object properties name when the default
- naming conventions can not be followed.
+ Use this macro to map a key to a property when the default naming conventions can not be used.
  */
-#define ANNOTATE_PROPERTY_FOR_KEY(property, key) XANNOTATE_PROPERTY_FOR_KEY(property, key)  // Force marco-expansion
-#define XANNOTATE_PROPERTY_FOR_KEY(property, key) -(NSString*)orm_property_for_key_##key {return @#property;}
+#define MAP_KEY_TO_PROPERY(key, property) XMAP_KEY_TO_PROPERY(key, property)  // Force marco-expansion
+#define XMAP_KEY_TO_PROPERY(key, property) -(NSString*)object_mapper_property_for_##key {return @#property;}
 
 
 /**
- Use this macro to annotate properties of NSArray type with the type of object to store in the arrray.
+ Use this macro to map properties of NSArray type to the class to store in the arrray.
  */
-#define ANNOTATE_CLASS_FOR_ARRAY(clazz, property) XANNOTATE_CLASS_FOR_ARRAY(clazz, property)   // Force marco-expansion
-#define XANNOTATE_CLASS_FOR_ARRAY(clazz, property) -(Class)orm_class_for_array_##property {return [clazz class];}
+#define MAP_CLASS_TO_ARRAY(clazz, property) XMAP_CLASS_TO_ARRAY(clazz, property)   // Force marco-expansion
+#define XMAP_CLASS_TO_ARRAY(clazz, property) -(Class)object_mapper_class_for_##property {return [clazz class];}
 
 
 /**
- JsonORM is an Objective-C framework that map parsed JSON objects (e.g. from JSONKit) into domain 
+ Use this macro to map keys to custom converter blocks. Converter blocks will allow converting the value 
+ before assigning it to the property.
+ The block must confirm to the following definition id(^)(id), accepting the key value and returning a new
+ value that will be assigned to the property.
+ */
+#define MAP_KEY_TO_BLOCK(key, block) -(id(^)(id))object_mapper_block_for_##key {return block}
+
+
+/**
+ ObjectMapper is an Objective-C framework that map parsed JSON objects (e.g. from JSONKit) into domain 
  objects automatically.
  
- ###How it works
+ ###Why
+ Most JSON parsers in Objective-C will parse your JSON and delivery either NSDictionary or NSArray as 
+ the result. Turning these objects into domain objects often requires writing repetative boilerplate 
+ code, manually setting your properties from the NSDictionary and NSArray. Not any longer, ObjectMapper 
+ will solve this as long as you follow a few conventions when defining your domain objects.
+ 
+ ###How does it work
  
  Turning JSON into domain objects typically involves the following steps:
  
  1. Request your JSON with a http request  
  2. Parse the response JSON using a JSON parser/decoder, e.g. JSONKit  
- 3. Manually map the parsed JSON into domain objects  
- 4. Use your newly populated domain objects to store in core data or as your model objects
+ 3. Manually map the parsed JSON into the domain objects properties
+ 4. Use your newly populated domain objects to store in core data or use as your model objects
  
- The framework address step 3 above mapping the parsed JSON into domain objects automatically, drastically 
+ The framework address step 3 above, mapping the parsed JSON into domain objects automatically, drastically 
  reducing the need to write boilerplate code.
  
  The framework will iterate over the parsed JSON objects (normally NSDictonary and NSArray) and figure 
@@ -50,7 +64,7 @@
  1. Each key/value-pair in the NSDictionary will be mapped to a property with the same name in the domain object  
  2. If the key is a reserved word in Objective-C, add “_” in front of the property name in the domain   
  object to get around any compiler errors  
- 3. Use the macro ANNOTATE_PROPERTY_FOR_KEY to map a key to an arbitrary property name
+ 3. Use the macro MAP_KEY_TO_PROPERY to map a key to an arbitrary property name
  4. If a matching property can not be found in the domain object at this point, it will be ignored  
  
  If the property is a class, a new instance of that class will be created and assigned to the property and the
@@ -58,8 +72,8 @@
  
  If the property is an array, a new instance of NSArray will be created and assigned to the property. Since it 
  is not possible to find out the type of the object to put in the array just by inspecting the property, the 
- developer need to help the mapper by annotating the property with the ANNOTATE_CLASS_FOR_ARRAY marco. The mapper
- will use this macro to figure out the class that should go into the array. A new instance of this class is 
+ developer need to help the mapper by annotating the property with the MAP_CLASS_TO_ARRAY marco. The mapper
+ will use this macro to figure out what class should go into the array. A new instance of this class is 
  created for each item in the list and added to the array and the mapping proccess will continue.
   
  The process steps described above will continue recursevly until the complete object graph has been 
@@ -69,25 +83,49 @@
  
  The framework use macros to help the mapper when the normal conversions are not enough.
   
- - `ANNOTATE_PROPERTY_FOR_KEY(property, key)` - Use this annotation to map a key/value to an arbitrary property name
- - `ANNOTATE_CLASS_FOR_ARRAY(clazz, property)`- Tell the mapper what class to put in a NSArray property
+ - `MAP_KEY_TO_PROPERY(key, property)` - Map a key/value to an arbitrary property
+ - `MAP_CLASS_TO_ARRAY(clazz, property)`- Tell the mapper what class to put in a NSArray property
  
  Use these macros in the @implementation section of your domain objects just above the properties @synthesize statement.
  
     @implementation Person
  
-    ANNOTATE_PROPERTY_FOR_KEY(personName, name)
+    MAP_KEY_TO_PROPERY(name, personName)
     @synthesize personName;
  
-    ANNOTATE_CLASS_FOR_ARRAY(NSString, phoneNumbers)
+    MAP_CLASS_TO_ARRAY(NSString, phoneNumbers)
     @synthesize phoneNumbers;
  
     @end
  
- The example above will map the key `street` to the domain object property `myStreet`. It also tells the mapper that the 
- NSArray property `phoneNumbers` should contain NSString.
+ The example above will map the key `name` to the domain object property `personName`. It also tells the mapper that 
+ the NSArray property `phoneNumbers` should contain NSString objects.
+ 
+ ###Custom converters
 
+ The framwork support executing custom converter blocks before assigning a value to a property. This is useful for 
+ converting the value type into a different property type or performing calculations on the value before assigning 
+ it to the property. 
+ 
+ The converter block must confirm to the definition `id(^)(id)`, accepting a key value and returning a new value 
+ that will be assigned to the property. 
+ 
+ Use the macro below to annotate your property with a converter block.
+  
+ - `MAP_KEY_TO_BLOCK(key, block)`
+ 
+ Use this macro in the @implementation section of your domain objects just above the properties @synthesize statement.
+ 
+    @implementation Dates
+ 
+    MAP_KEY_TO_BLOCK(dateFromUnixTimestamp, ^(NSNumber* timestamp) {
+      return [NSDate dateWithTimeIntervalSince1970:timestamp];
+    };)
+    @synthesize dateFromUnixTimestamp;
 
+    @end  
+ 
+ The example above will convert a unix timestamp into an NSDate before assigning it to the property.
  */
 @interface ObjectMapper : NSObject 
 

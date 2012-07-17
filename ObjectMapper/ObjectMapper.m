@@ -6,23 +6,21 @@
 //  Copyright 2011 Wadpam. All rights reserved.
 //
 
-
-
-// TODO Check memory usage
-// TODO Handle built in types (int, float etc)?
+// TODO: Check memory usage
+// TODO: Handle built in types (int, float etc)?
+// TODO: Support mapping to Core Data object
 
 // Future
-// Add support for running customer hooks/method before setting the property
-// Add a cache to reduce reflection
+// Add a cache to reduce reflection, if needed add a map as property to save all mappings
 // Add code generation of meta data to reduce reflecton
 
 
 #import "ObjectMapper.h"
 #import <objc/runtime.h>
-
+#include <sys/time.h>
 
 // Uncomment the line below to get debug statements
-//#define PRINT_DEBUG
+#define PRINT_DEBUG
 //Debug macros
 #ifdef PRINT_DEBUG
 #  define DLOG(fmt, ...) NSLog( (@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
@@ -32,9 +30,9 @@
 // ALog always displays output regardless of the DEBUG setting
 #define ALOG(fmt, ...) NSLog( (@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
 
-#define CLASS_FOR_ARRAY_PREFIX @"orm_class_for_array_"
-#define PROPERTY_FOR_KEY_PREFIX @"orm_property_for_key_"
-
+#define MAP_KEY_TO_PROPERTY_PREFIX @"object_mapper_property_for_"
+#define MAP_CLASS_TO_ARRAY_PREFIX @"object_mapper_class_for_"
+#define MAP_KEY_TO_BLOCK_PREFIX @"object_mapper_block_for_"
 
 // Possible parsed JSON types
 typedef enum {
@@ -83,6 +81,7 @@ typedef enum {
 - (Class)classForArrayWithKey:(NSString*)key target:(id)target;
 - (Class)classFromTypeEncoding:(NSString*)typeEncoding;
 - (JSONType)jsonType:(id)source;
+- (double)currentMillisecondTime;
 - (NSError*)parsingErrorWithDescription:(NSString*)format, ...;
 
 + (NSArray*)propertyNamesForClass:(Class)aClass;
@@ -125,13 +124,11 @@ typedef enum {
   id root = nil;    
   
   // Check input parameters
-  if (source == nil)
+  if (source == nil) {
     *error = [self parsingErrorWithDescription:@"Parsed JSON is nil, not possible to do any mapping"];
-  else if (clazz == nil)
-    *error = [self parsingErrorWithDescription:@"Root class can not be nil"];
-  
-  // Something wrong with the input parameters
-  if (*error) {
+    return nil;
+  } else if (clazz == nil) {
+    *error = [self parsingErrorWithDescription:@"Root class can not be nil"];  
     return nil;
   }
   
@@ -210,7 +207,7 @@ typedef enum {
       
     // Check anotation mapping
     if (property == NULL) {
-      NSString *selectorName = [PROPERTY_FOR_KEY_PREFIX stringByAppendingString:key];
+      NSString *selectorName = [MAP_KEY_TO_PROPERTY_PREFIX stringByAppendingString:key];
       if ([target respondsToSelector:NSSelectorFromString(selectorName)]) {
         DLOG(@"Found matching annotation for key %@", key);
         NSString *propertyName = [target performSelector:NSSelectorFromString(selectorName)]; 
@@ -220,11 +217,11 @@ typedef enum {
       
     if (property == NULL) {
       // The property does not exist, skip mapping
-      DLOG(@"**INFO** property with key name: %@ does not exists in target, skip", key);
+      DLOG(@"Property with key name: %@ does not exists in target, skip", key);
       // Print all methods and properties for debugging purpose
       //NSArray *allMethodNames = [ObjectMapper methodNamesForClass:[target class]];
       //NSArray *allPropertyNames = [ObjectMapper propertyNamesForClass:[target class]];
-      //DLOG(@"All methods names: %@", allMethodsNames);
+      //DLOG(@"All methods names: %@", allMethodNames);
       //DLOG(@"All property names: %@", allPropertyNames);
       continue;
     }
@@ -232,16 +229,14 @@ typedef enum {
     // Get the json value
     id value = [source valueForKey:key];
     
-    Class targetPropertyClazz = Nil;
+    // Get class from key name
+    Class targetPropertyClazz = [self classForProperty:property];
     id targetPropertyValue = nil;
     
     // Check the type of the value
     switch ([self jsonType:value]) {
       case Object:
         DLOG(@"Value is of type object");
-        
-        // Get class from key name
-        targetPropertyClazz = [self classForProperty:property];
         
         // Create object from class
         targetPropertyValue = [[[targetPropertyClazz alloc] init] autorelease];
@@ -257,14 +252,11 @@ typedef enum {
       case Array:
         DLOG(@"JSON value is of type array");
         
-        // Get the array with parsed JSON
-        NSArray *valueArray = value;
-        
         // Need to figure out if the content of the array are objects or basic types
-        if ([valueArray count] == 0) {
+        if ([value count] == 0) {
           // Empty array
           targetPropertyValue = [NSArray array];
-        } else if ([valueArray count] > 0 && [self jsonType:[valueArray objectAtIndex:0]] == Object) {
+        } else if ([value count] > 0 && [self jsonType:[value objectAtIndex:0]] == Object) {
           targetPropertyValue = [NSMutableArray array];
           
           // Get the class that goes into the array
@@ -274,16 +266,16 @@ typedef enum {
           [self map:value toArray:targetPropertyValue withClass:targetPropertyClazz error:error];    
         } else
           // Array contain basic types
-          [self map:valueArray toArray:&targetPropertyValue withBasicType:[[valueArray objectAtIndex:0] class] error:error];
+          [self map:value toArray:&targetPropertyValue withBasicType:[[value objectAtIndex:0] class] error:error];
         
         break;
       case Null:
-        value = nil;
+        targetPropertyValue = nil;
         break;
-      case String:               
-      case Number:              
+      case String:
+      case Number:
         DLOG(@"Value is of basic type");        
-        targetPropertyValue = [self mapToBasicType:[source valueForKey:key] error:error];
+        targetPropertyValue = [self mapToBasicType:value error:error];
         if(targetPropertyValue == nil) { 
           *error = [self parsingErrorWithDescription:@"Could not create basic type for key: %@", key];
           continue;
@@ -294,9 +286,18 @@ typedef enum {
         continue;
     }
     
-    // Set the value for the property
-    [target setValue:targetPropertyValue forKey:[NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding]];
+    // Check for custom converters
+    NSString *selectorName = [MAP_KEY_TO_BLOCK_PREFIX stringByAppendingString:key];
+    if ([target respondsToSelector:NSSelectorFromString(selectorName)]) {
+      DLOG(@"Value before conversion %@", targetPropertyValue);
+      id(^coverterBlock)(id) = [target performSelector:NSSelectorFromString(selectorName)];
+      targetPropertyValue = coverterBlock(targetPropertyValue);
+      DLOG(@"Value after conversion %@", targetPropertyValue);
+    }
     
+    // Set the value for the property
+    // TODO: Add check for the type of the target property matching the value set?
+    [target setValue:targetPropertyValue forKey:[NSString stringWithCString:property_getName(property) encoding:NSASCIIStringEncoding]];
   }
   
   // Drain the autorelease pool
@@ -333,7 +334,6 @@ typedef enum {
     // Map newly created object
     [self map:element toObject:object error:error];    
   }
-  
 }
 
 
@@ -355,7 +355,7 @@ typedef enum {
       DLOG(@"Basic type is a Number of type %s", [source objCType]);
       break;  
     default:
-      *error = [self parsingErrorWithDescription:@"Basic type is of unkonw type %@", source];
+      *error = [self parsingErrorWithDescription:@"JSON basic type is of unkonwn type %@", source];
       return nil;
   }
   return source;
@@ -374,7 +374,7 @@ typedef enum {
 
 // Return a class to be used as objects in an array based on the key name
 - (Class)classForArrayWithKey:(NSString*)key target:(id)target {
-  NSString *selectorName = [CLASS_FOR_ARRAY_PREFIX stringByAppendingString:key];
+  NSString *selectorName = [MAP_CLASS_TO_ARRAY_PREFIX stringByAppendingString:key];
   if ([target respondsToSelector:NSSelectorFromString(selectorName)]) {
     DLOG(@"Found matching annotation for key %@", key);
     Class clazz = [target performSelector:NSSelectorFromString(selectorName)];
@@ -387,7 +387,6 @@ typedef enum {
     DLOG(@"No annotation found. Use the key name: %@ to constuct the class", key);
     return NSClassFromString([[[key substringWithRange:NSMakeRange(0, 1)] capitalizedString] stringByAppendingString:[key substringFromIndex:1]]);
   }
-  
 }
 
 
@@ -407,7 +406,6 @@ typedef enum {
       return NSClassFromString(clazzName);
     }
   } 
-    
   return nil;
 }
 
@@ -426,6 +424,14 @@ typedef enum {
     return Null;
   else 
     return Unkown;
+}
+
+
+// Get a timestamp in milliseconds
+- (double)currentMillisecondTime {  
+  struct timeval time; 
+  gettimeofday(&time, NULL); 
+  return (time.tv_sec * 1000) + (time.tv_usec / 1000); 
 }
 
 

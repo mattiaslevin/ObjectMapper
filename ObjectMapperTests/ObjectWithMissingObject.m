@@ -13,7 +13,7 @@
 @synthesize arrayOfIntegers = arrayOfIntegers_;
 @synthesize arrayOfDecimals = arrayOfDecimals_;
 @synthesize arrayOfBools = arrayOfBools_;
-ANNOTATE_CLASS_FOR_ARRAY(ObjectWithBasicTypes, arrayOfObjects)
+MAP_CLASS_TO_ARRAY(ObjectWithBasicTypes, arrayOfObjects)
 @synthesize arrayOfObjects = arrayOfObjects_;
 @synthesize arrayOfMissingObjects = arrayOfMissingObjects_;
 

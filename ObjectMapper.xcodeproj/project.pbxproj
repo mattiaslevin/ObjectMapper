@@ -22,6 +22,10 @@
 
 /* Begin PBXBuildFile section */
 		CD8642BD1588EE35004AFCEC /* ObjectWithBasicTypesMissingJSONAttribute.json in Resources */ = {isa = PBXBuildFile; fileRef = CD8642BC1588EE35004AFCEC /* ObjectWithBasicTypesMissingJSONAttribute.json */; };
+		CD88E06515B1B784005F8C1B /* ObjectWithDateISO8601.json in Resources */ = {isa = PBXBuildFile; fileRef = CD88E06415B1B784005F8C1B /* ObjectWithDateISO8601.json */; };
+		CD88E06E15B1CE17005F8C1B /* ObjectWithDateISO8601.m in Sources */ = {isa = PBXBuildFile; fileRef = CD88E06D15B1CE17005F8C1B /* ObjectWithDateISO8601.m */; };
+		CD88E07215B592CB005F8C1B /* SimpleDateConverter.h in Headers */ = {isa = PBXBuildFile; fileRef = CD88E07015B592CB005F8C1B /* SimpleDateConverter.h */; };
+		CD88E07315B592CB005F8C1B /* SimpleDateConverter.m in Sources */ = {isa = PBXBuildFile; fileRef = CD88E07115B592CB005F8C1B /* SimpleDateConverter.m */; };
 		CDB496A4157E572E00C2157F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496A3157E572E00C2157F /* Foundation.framework */; };
 		CDB496B2157E572F00C2157F /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496B1157E572F00C2157F /* SenTestingKit.framework */; };
 		CDB496B4157E572F00C2157F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB496B3157E572F00C2157F /* UIKit.framework */; };
@@ -61,6 +65,11 @@
 
 /* Begin PBXFileReference section */
 		CD8642BC1588EE35004AFCEC /* ObjectWithBasicTypesMissingJSONAttribute.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithBasicTypesMissingJSONAttribute.json; sourceTree = "<group>"; };
+		CD88E06415B1B784005F8C1B /* ObjectWithDateISO8601.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ObjectWithDateISO8601.json; sourceTree = "<group>"; };
+		CD88E06C15B1CE17005F8C1B /* ObjectWithDateISO8601.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithDateISO8601.h; sourceTree = "<group>"; };
+		CD88E06D15B1CE17005F8C1B /* ObjectWithDateISO8601.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithDateISO8601.m; sourceTree = "<group>"; };
+		CD88E07015B592CB005F8C1B /* SimpleDateConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleDateConverter.h; sourceTree = "<group>"; };
+		CD88E07115B592CB005F8C1B /* SimpleDateConverter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleDateConverter.m; sourceTree = "<group>"; };
 		CDB496A0157E572E00C2157F /* libObjectMapper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libObjectMapper.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB496A3157E572E00C2157F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CDB496A7157E572E00C2157F /* ObjectMapper-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ObjectMapper-Prefix.pch"; sourceTree = "<group>"; };
@@ -85,7 +94,7 @@
 		CDB496E2157E581200C2157F /* ObjectWithMissingObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithMissingObject.m; sourceTree = "<group>"; };
 		CDB496E3157E581200C2157F /* ObjectWithObjectTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithObjectTypes.h; sourceTree = "<group>"; };
 		CDB496E4157E581200C2157F /* ObjectWithObjectTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithObjectTypes.m; sourceTree = "<group>"; };
-		CDB496E5157E581200C2157F /* ObjectWithSomeNilValues.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ObjectWithSomeNilValues.h; sourceTree = "<group>"; };
+		CDB496E5157E581200C2157F /* ObjectWithSomeNilValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectWithSomeNilValues.h; sourceTree = "<group>"; };
 		CDB496E6157E581200C2157F /* ObjectWithSomeNilValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObjectWithSomeNilValues.m; sourceTree = "<group>"; };
 		CDB496E7157E581200C2157F /* RuntimeReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RuntimeReporter.h; sourceTree = "<group>"; };
 		CDB496E8157E581200C2157F /* RuntimeReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RuntimeReporter.m; sourceTree = "<group>"; };
@@ -123,6 +132,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CD88E06F15B59283005F8C1B /* Converters */ = {
+			isa = PBXGroup;
+			children = (
+				CD88E07015B592CB005F8C1B /* SimpleDateConverter.h */,
+				CD88E07115B592CB005F8C1B /* SimpleDateConverter.m */,
+			);
+			path = Converters;
+			sourceTree = "<group>";
+		};
 		CDB49695157E572E00C2157F = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +175,7 @@
 			children = (
 				CDB496D0157E57C400C2157F /* ObjectMapper.h */,
 				CDB496D1157E57C400C2157F /* ObjectMapper.m */,
+				CD88E06F15B59283005F8C1B /* Converters */,
 				CDB496A6157E572E00C2157F /* Supporting Files */,
 			);
 			path = ObjectMapper;
@@ -191,6 +210,8 @@
 				CDB496E0157E581200C2157F /* ObjectWithBuiltInTypes.m */,
 				CDB496E1157E581200C2157F /* ObjectWithMissingObject.h */,
 				CDB496E2157E581200C2157F /* ObjectWithMissingObject.m */,
+				CD88E06C15B1CE17005F8C1B /* ObjectWithDateISO8601.h */,
+				CD88E06D15B1CE17005F8C1B /* ObjectWithDateISO8601.m */,
 				CDB496E7157E581200C2157F /* RuntimeReporter.h */,
 				CDB496E8157E581200C2157F /* RuntimeReporter.m */,
 				CDB496EB157E581200C2157F /* ObjectWithBasicTypes.json */,
@@ -201,6 +222,7 @@
 				CDB496EF157E581200C2157F /* ObjectWithSomeNullValues.json */,
 				CDB496E9157E581200C2157F /* ArrayWithObjectTypes.json */,
 				CDB496ED157E581200C2157F /* ObjectWithMissingObject.json */,
+				CD88E06415B1B784005F8C1B /* ObjectWithDateISO8601.json */,
 				CDB496BA157E572F00C2157F /* Supporting Files */,
 			);
 			path = ObjectMapperTests;
@@ -223,6 +245,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDB496D2157E57C400C2157F /* ObjectMapper.h in Headers */,
+				CD88E07215B592CB005F8C1B /* SimpleDateConverter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,6 +329,7 @@
 				CDB49711157E581200C2157F /* ObjectWithObjectTypes.json in Resources */,
 				CDB49712157E581200C2157F /* ObjectWithSomeNullValues.json in Resources */,
 				CD8642BD1588EE35004AFCEC /* ObjectWithBasicTypesMissingJSONAttribute.json in Resources */,
+				CD88E06515B1B784005F8C1B /* ObjectWithDateISO8601.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDB496D3157E57C400C2157F /* ObjectMapper.m in Sources */,
+				CD88E07315B592CB005F8C1B /* SimpleDateConverter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +388,7 @@
 				CDB49708157E581200C2157F /* ObjectWithSomeNilValues.m in Sources */,
 				CDB4970B157E581200C2157F /* RuntimeReporter.m in Sources */,
 				CDB49720158390F200C2157F /* AnnotatedObjectWithBasicTypes.m in Sources */,
+				CD88E06E15B1CE17005F8C1B /* ObjectWithDateISO8601.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
