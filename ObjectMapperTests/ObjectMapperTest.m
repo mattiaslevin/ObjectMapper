@@ -19,6 +19,17 @@
 #import "ObjectWithBuiltInTypes.h"
 #import "ObjectWithDateISO8601.h"
 
+// Uncomment the line below to get debug statements
+#define PRINT_DEBUG
+//Debug macros
+#ifdef PRINT_DEBUG
+#  define DLOG(fmt, ...) NSLog( (@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#  define DLOG(...)
+#endif
+// ALog always displays output regardless of the DEBUG setting
+#define ALOG(fmt, ...) NSLog( (@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+
 
 @implementation ObjectMapperTest
 
@@ -53,7 +64,7 @@
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -74,7 +85,7 @@
   NSError *error = nil;
   AnnotatedObjectWithBasicTypes *domainObject = [parsedJSON mapToClass:[AnnotatedObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -99,7 +110,7 @@
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -121,7 +132,7 @@
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -143,7 +154,7 @@
   NSError *error = nil;
   ObjectWithObjectTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithObjectTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -170,7 +181,7 @@
   NSError *error = nil;
   ObjectWithArrayTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithArrayTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   //Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -209,7 +220,7 @@
   NSError *error = nil;
   ObjectWithSomeNilValues *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithSomeNilValues class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -243,7 +254,7 @@
   NSError *error = nil;
   NSArray *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -267,14 +278,14 @@
   // Get test data
   NSString *json = @"[\"string1\", \"string2\", \"string3\", \"string4\"]";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   NSArray *domainObject = [mapper mapObject:parsedJSON toClass:[NSString class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -291,14 +302,14 @@
   // Get test data
   NSString *json = @"[111, 222, 333, 444]";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   NSArray *domainObject = [mapper mapObject:parsedJSON toClass:[NSNumber class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -315,14 +326,14 @@
   // Get test data
   NSString *json = @"{\"anInteger\":11, \"aDouble\":12.23, \"aBoolean\":false}";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   ObjectWithBuiltInTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBuiltInTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -338,14 +349,14 @@
   // Get test data
   NSString *json = @"[]";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   NSArray *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   //Check the result
   STAssertNotNil(domainObject, @"Domain object is nil");
@@ -359,14 +370,14 @@
   // Get test data
   NSString *json = @"\"onlyAStingValue\"";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   NSString *domainObject = [mapper mapObject:parsedJSON toClass:[NSString class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
@@ -378,14 +389,14 @@
   // Get test data
   NSString *json = @"123";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   NSString *domainObject = [mapper mapObject:parsedJSON toClass:[NSNumber class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
@@ -397,14 +408,14 @@
   // Get test data
   NSString *json = @"null";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithBasicTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
@@ -416,14 +427,14 @@
   // Get test data
   NSString *json = @"null";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithArrayTypes class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
@@ -435,14 +446,14 @@
   // Get test data
   NSString *json = @"null";
   id parsedJSON = [json objectFromJSONString];
-  NSLog(@"Parsed JONS: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   
   // Map JSON
   ObjectMapper *mapper = [ObjectMapper mapper];
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:[NSString class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
@@ -459,8 +470,7 @@
   NSError *error = nil;
   ObjectWithBasicTypes *domainObject = [mapper mapObject:parsedJSON toClass:nil withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
-  NSLog(@"Error description: %@", [error description]);
+  DLOG(@"Mapped object: %@", domainObject);
 
   // Check the result
   STAssertNil(domainObject, @"Domain object should be nil");
@@ -477,8 +487,7 @@
   NSError *error = nil;
   ObjectWithMissingObject *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithMissingObject class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
-  NSLog(@"Error description: %@", [error description]);
+  DLOG(@"Mapped object: %@", domainObject);
 
   // Check the result
   STAssertNil(domainObject, @"Domain object is not nil");
@@ -495,8 +504,7 @@
   NSError *error = nil;
   ObjectWithDateISO8601 *domainObject = [mapper mapObject:parsedJSON toClass:[ObjectWithDateISO8601 class] withError:&error];
   
-  NSLog(@"Mapped object: %@", domainObject);
-  NSLog(@"Error description: %@", [error description]);
+  DLOG(@"Mapped object: %@", domainObject);
   
   // Date reference used in the test 
   // unix: 1342356893 
@@ -526,10 +534,8 @@
   STAssertTrue([domainObject.date8 isEqualToDate:referenceUTCDate], @"Date 8 Date(1342356893) is not equal to reference date");
   STAssertTrue([[domainObject.date9 description] isEqualToString:@"2012-07-15 13:54:53 +0000"], 
                @"Date 9 Date(1342356893+1000) is not equal to reference date");
-  //NSLog(@"Date 9 value %@ and ref value %@", domainObject.date9, referenceUTCPlus1000Date);
   STAssertTrue([[domainObject.date10 description] isEqualToString:@"2012-07-15 11:54:53 +0000"], 
                @"Date 10 Date(1342356893-1000) is not equal to reference date");
-  //NSLog(@"Date 10 value %@ and ref value %@", domainObject.date10, referenceUTCDMinus1000Date);
   
   STAssertNotNil(domainObject, @"Domain object is nil");
   STAssertNil(error, @"Error object is not nil");
@@ -565,7 +571,7 @@
   
   //Parse JSON
   id parsedJSON = [jsonData objectFromJSONData];
-  NSLog(@"Parsed JSON: %@", parsedJSON);
+  DLOG(@"Parsed JSON: %@", parsedJSON);
   STAssertFalse(parsedJSON == nil, @"JSON parsing failed");
   
   return parsedJSON;

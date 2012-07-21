@@ -15,34 +15,34 @@
 @synthesize _decimal = _decimal_;
 @synthesize boolean = boolean_;
 
-MAP_UNIX_TIMESTAMP_TO_DATE(date1)
+MapUnixTimestampToDate(date1)
 @synthesize date1 = date1_;
 
-MAP_ISO8601_DATE_TO_DATE(date2)
+MapISO8601ToDate(date2)
 @synthesize date2 = date2_;
 
-MAP_ISO8601_DATE_TO_DATE(date3)
+MapISO8601ToDate(date3)
 @synthesize date3 = date3_;
 
-MAP_ISO8601_DATE_TO_DATE(date4)
+MapISO8601ToDate(date4)
 @synthesize date4 = date4_;
 
-MAP_ISO8601_DATE_TO_DATE(date5)
+MapISO8601ToDate(date5)
 @synthesize date5 = date5_;
 
-MAP_ISO8601_DATE_TO_DATE(date6)
+MapISO8601ToDate(date6)
 @synthesize date6 = date6_;
 
-MAP_ISO8601_DATE_TO_DATE(date7)
+MapISO8601ToDate(date7)
 @synthesize date7 = date7_;
 
-MAP_NET_DATE_TO_DATE(date8)
+MapNETDateToDate(date8)
 @synthesize date8 = date8_;
 
-MAP_NET_DATE_TO_DATE(date9)
+MapNETDateToDate(date9)
 @synthesize date9 = date9_;
 
-MAP_NET_DATE_TO_DATE(date10)
+MapNETDateToDate(date10)
 @synthesize date10 = date10_;
 
 

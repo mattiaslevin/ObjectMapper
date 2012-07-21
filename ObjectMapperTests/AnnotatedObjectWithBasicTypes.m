@@ -12,10 +12,10 @@
 @implementation AnnotatedObjectWithBasicTypes 
 
 
-MAP_KEY_TO_PROPERY(string, stringWithADifferentName)
+MapKeyToProperty(string, stringWithADifferentName)
 @synthesize stringWithADifferentName = stringWithADifferentName_;
 
-MAP_KEY_TO_PROPERY(integer, INTEGER)
+MapKeyToProperty(integer, INTEGER)
 @synthesize integerWithADifferentName = integerWithADifferentName_;
 
 @synthesize _decimal = _decimal_;

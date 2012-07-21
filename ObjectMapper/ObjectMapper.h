@@ -12,15 +12,15 @@
 /**
  Use this macro to map a key to a property when the default naming conventions can not be used.
  */
-#define MAP_KEY_TO_PROPERY(key, property) XMAP_KEY_TO_PROPERY(key, property)  // Force marco-expansion
-#define XMAP_KEY_TO_PROPERY(key, property) -(NSString*)object_mapper_property_for_##key {return @#property;}
+#define MapKeyToProperty(key, property) XMapKeyToProperty(key, property)  // Force marco-expansion
+#define XMapKeyToProperty(key, property) -(NSString*)object_mapper_property_for_##key {return @#property;}
 
 
 /**
  Use this macro to map properties of NSArray type to the class to store in the arrray.
  */
-#define MAP_CLASS_TO_ARRAY(clazz, property) XMAP_CLASS_TO_ARRAY(clazz, property)   // Force marco-expansion
-#define XMAP_CLASS_TO_ARRAY(clazz, property) -(Class)object_mapper_class_for_##property {return [clazz class];}
+#define MapClassToArray(clazz, property) XMapClassToArray(clazz, property)   // Force marco-expansion
+#define XMapClassToArray(clazz, property) -(Class)object_mapper_class_for_##property {return [clazz class];}
 
 
 /**
@@ -30,7 +30,7 @@
  The block must confirm to the following definition id(^)(id), accepting the key value and returning a new
  value that will be assigned to the property.
  */
-#define MAP_KEY_TO_BLOCK(key, block) -(id(^)(id))object_mapper_block_for_##key {return block}
+#define MapKeyToBlock(key, block) -(id(^)(id))object_mapper_block_for_##key {return block}
 
 
 /**
@@ -65,7 +65,7 @@
  1. Each key/value-pair in the NSDictionary will be mapped to a property with the same name in the domain object  
  2. If the key is a reserved word in Objective-C, add “_” in front of the property name in the domain   
  object to get around any compiler errors  
- 3. Use the macro MAP_KEY_TO_PROPERY to map a key to an arbitrary property name
+ 3. Use the macro `MapKeyToProperty to map a key to an arbitrary property name
  4. If a matching property can not be found in the domain object at this point, it will be ignored  
  
  If the property is a class, a new instance of that class will be created and assigned to the property and the
@@ -73,7 +73,7 @@
  
  If the property is an array, a new instance of NSArray will be created and assigned to the property. Since it 
  is not possible to find out the type of the object to put in the array just by inspecting the property, the 
- developer need to help the mapper by annotating the property with the MAP_CLASS_TO_ARRAY marco. The mapper
+ developer need to help the mapper by annotating the property with the `MapKeyToProperty` marco. The mapper
  will use this macro to figure out what class should go into the array. A new instance of this class is 
  created for each item in the list and added to the array and the mapping proccess will continue.
   
@@ -84,17 +84,17 @@
  
  The framework use macros to help the mapper when the normal conversions are not enough.
   
- - `MAP_KEY_TO_PROPERY(key, property)` - Map a key/value to an arbitrary property
- - `MAP_CLASS_TO_ARRAY(clazz, property)`- Tell the mapper what class to put in a NSArray property
+ - `MapKeyToProperty(key, property)` - Map a key/value to an arbitrary property
+ - `MapClassToArray(clazz, property)`- Tell the mapper what class to put in a NSArray property
  
  Use these macros in the @implementation section of your domain objects just above the properties @synthesize statement.
  
     @implementation Person
  
-    MAP_KEY_TO_PROPERY(name, personName)
+    MapKeyToProperty(name, personName)
     @synthesize personName;
  
-    MAP_CLASS_TO_ARRAY(NSString, phoneNumbers)
+    MapClassToArray(NSString, phoneNumbers)
     @synthesize phoneNumbers;
  
     @end
@@ -113,13 +113,13 @@
  
  Use the macro below to annotate your property with a converter block.
   
- - `MAP_KEY_TO_BLOCK(key, block)`
+ - `MapKeyToBlock(key, block)`
  
  Use this macro in the @implementation section of your domain objects just above the properties @synthesize statement.
  
     @implementation Dates
  
-    MAP_KEY_TO_BLOCK(dateFromUnixTimestamp, ^(NSNumber* timestamp) {
+    MapKeyToBlock(dateFromUnixTimestamp, ^(NSNumber* timestamp) {
       return [NSDate dateWithTimeIntervalSince1970:timestamp];
     };)
     @synthesize dateFromUnixTimestamp;

@@ -22,12 +22,12 @@ The following conventions are used for mapping key/values into domain objects:
 
 1. Each key/value-pair in the NSDictionary will be mapped to a property with the same name in the domain object  
 2. If the key is a reserved word in Objective-C, add “_” in front of the property name in the domain object to get around any compiler errors  
-3. Use the macro MAP_KEY_TO_PROPERY to map a key to an arbitrary property name
+3. Use the macro `MapKeyToPropert` to map a key to an arbitrary property name
 4. If a matching property can not be found in the domain object at this point, it will be ignored  
  
 If the property is a class, a new instance of that class will be created and assigned to the property and the mapping process will continue.
  
-If the property is an array, a new instance of NSArray will be created and assigned to the property. Since it is not possible to find out the type of the object to put in the array just by inspecting the property, the developer need to help the mapper by annotating the property with the MAP_CLASS_TO_ARRAY marco. The mapper will use this macro to figure out what class should go into the array. A new instance of this class is created for each item in the list and added to the array and the mapping proccess will continue.
+If the property is an array, a new instance of NSArray will be created and assigned to the property. Since it is not possible to find out the type of the object to put in the array just by inspecting the property, the developer need to help the mapper by annotating the property with the `MapClassToArray` marco. The mapper will use this macro to figure out what class should go into the array. A new instance of this class is created for each item in the list and added to the array and the mapping proccess will continue.
   
 The process steps described above will continue recursevly until the complete object graph has been created.
  
@@ -35,17 +35,17 @@ The process steps described above will continue recursevly until the complete ob
  
 The framework use macros to help the mapper when the normal conversions are not enough.
 
-- `MAP_KEY_TO_PROPERY(key, property)` - Map a key/value to an arbitrary property
-- `MAP_CLASS_TO_ARRAY(clazz, property)`- Tell the mapper what class to put in a NSArray property
+- `MapKeyToPropert(key, property)` - Map a key/value to an arbitrary property
+- `MapClassToArray(clazz, property)`- Tell the mapper what class to put in a NSArray property
 
 Use these macros in the @implementation section of your domain objects just above the properties @synthesize statement.
  
     @implementation Person
  
-    MAP_KEY_TO_PROPERY(name, personName)
+    MapKeyToPropert(name, personName)
     @synthesize personName;
  
-    MAP_CLASS_TO_ARRAY(NSString, phoneNumbers)
+    MapClassToArray(NSString, phoneNumbers)
     @synthesize phoneNumbers;
  
     @end
@@ -60,13 +60,13 @@ The converter block must confirm to the definition `id(^)(id)`, accepting a key 
  
 Use the macro below to annotate your property with a converter block.
   
-- `MAP_KEY_TO_BLOCK(key, block)`
+- `MapKeyToBlock(key, block)`
  
 Use this macro in the @implementation section of your domain objects just above the properties @synthesize statement.
  
     @implementation Dates
  
-    MAP_KEY_TO_BLOCK(dateFromUnixTimestamp, ^(NSNumber* timestamp) {
+    MapKeyToBlock(dateFromUnixTimestamp, ^(NSNumber* timestamp) {
       return [NSDate dateWithTimeIntervalSince1970:timestamp];
     };)
     @synthesize dateFromUnixTimestamp;
@@ -94,7 +94,7 @@ Person.m:
     
 	@implementation Person
 	
-	MAP_KEY_TO_PROPERY(name, personName)
+	MapKeyToPropert(name, personName)
 	@synthesize personName;
 	@synthesize age;
 	@synthesize male;
@@ -160,7 +160,7 @@ MyContacts.m:
 	
 	@implementation MyContacts
 	
-	MAP_CLASS_TO_ARRAY(Persons, contacts)
+	MapClassToArray(Persons, contacts)
 	@synthesize contacts;
 
 	@end

@@ -120,7 +120,7 @@ typedef enum {
 // Map parsed JSON to domain objects
 - (id)mapObject:(id)source toClass:(id)clazz withError:(NSError**)error {
   double startTimestamp = [self timestamp];
-  #pragma unused(startTimestamp) // Supress compiler warning with logging is disabled
+  #pragma unused(startTimestamp) // Supress compiler warning when logging is disabled
   
   // The root object in the graph
   id root = nil;    

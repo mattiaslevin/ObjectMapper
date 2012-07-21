@@ -19,7 +19,7 @@
 
 // Convert a UNIX timestamp to NSDate
 + (NSDate*)dateFromUNIXTimestamp:(NSNumber*)timestamp {
-  NSLog(@"Convert from unix timestamp %@", timestamp);
+  //NSLog(@"Convert from unix timestamp %@", timestamp);
   
   // Convert to string
   NSString *timestampString = [timestamp stringValue];
@@ -40,8 +40,8 @@
 
 
 // Convert a ISO8601 time into NSDate.
-+ (NSDate*)dateFromISO8601Date:(NSString*)dateString {
-  NSLog(@"Convert from ISO8601 date %@", dateString);
++ (NSDate*)dateFromISO8601:(NSString*)dateString {
+  //NSLog(@"Convert from ISO8601 date %@", dateString);
   
   // Check if ISO8601
   NSError *error = nil;
@@ -77,7 +77,7 @@
 
 // Convert a .NET date, e.g. "\/Date(1310669017000)\/", into a NSDate
 + (NSDate*)dateFromNETDate:(NSString*)dateString {
-  NSLog(@"Convert from .NET date %@", dateString);
+  //NSLog(@"Convert from .NET date %@", dateString);
 
   // Check if .NET date format
   NSError *error = nil;
