@@ -14,13 +14,13 @@
   * `MapNETDateToDate(key)`
   
 ####New features
--
+None
 
 ####Major bugfixes
--
+None
 
 ####Known problems
--
+None
 
 ##Version 0.95 (2012-07-16)
 
@@ -39,10 +39,10 @@
   * .NET date
 
 ####Major bugfixes
--
+None
 
 ####Known problems
--
+None
 
 ##Version 0.90 (2012-07-16)
 
@@ -50,10 +50,10 @@
 Fully functiona beta release.
 
 ####New features
-N/A.
+N/A
 
 ####Major bugfixes
-N/A.
+N/A
 
 ####Known problems
-N/A.
+N/A
